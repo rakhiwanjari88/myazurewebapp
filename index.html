@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Dose</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 50px;
+      transition: background-color 0.5s;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    #quote {
+      font-size: 1.5rem;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+
+    #time {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin-top: 30px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌞 Daily Dose</h1>
+  <div id="quote">Loading...</div>
+  <button onclick="generateQuote()">Refresh Mood</button>
+  <div id="time"></div>
+
+  <script>
+    const quotes = [
+      "Believe in yourself and all that you are.",
+      "You are stronger than you think. 💪",
+      "Push yourself, because no one else is going to do it for you.",
+      "Every day is a fresh start. 🌱",
+      "Don’t watch the clock; do what it does. Keep going.",
+      "Your limitation—it’s only your imagination.",
+      "Dream it. Wish it. Do it.",
+      "Start where you are. Use what you have. Do what you can."
+    ];
+
+    const colors = ['#fcefee', '#e0f7fa', '#fff3e0', '#ede7f6', '#e8f5e9', '#f3e5f5'];
+
+    function generateQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      const quote = quotes[randomIndex];
+      document.getElementById('quote').textContent = `"${quote}"`;
+
+      const colorIndex = Math.floor(Math.random() * colors.length);
+      document.body.style.backgroundColor = colors[colorIndex];
+    }
+
+    function updateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formatted = now.toLocaleDateString(undefined, options) + ' | ' + now.toLocaleTimeString();
+      document.getElementById('time').textContent = formatted;
+    }
+
+    // Initial load
+    generateQuote();
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
+
